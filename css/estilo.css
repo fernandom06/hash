@@ -1,0 +1,36 @@
+main{
+    font-size: 30px;
+    margin:auto ;
+    width: 710px;
+    text-align: center;
+    border: 1px black solid;
+    background-color: #2BA824;
+}
+
+h1{
+    background-color:black ;
+    color: white;
+    margin:0 ;
+    font-family: sans-serif;
+    font-size: 2em;
+}
+
+button{
+    border: none;
+    outline: none;
+    background-color:#3B3B3B;
+    margin-top: 10px;
+    color: white;
+    padding:10px;
+    font-size: 24px;
+    border-radius:10px;
+}
+button:hover{
+    background-color:black;
+}
+
+#resultado{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+

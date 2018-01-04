@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hash</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<main>
+    <div id="formulario">
+        <h1>Calculador de hash</h1>
+        <label for="hash">Introduzca el hash</label><br>
+        <input type="text" id="hash" name="hash"><br>
+        <button type="button" id="md5">MD5</button>
+        <button type="button" id="sha1">SHA-1</button>
+        <button type="button" id="sha256">SHA256</button>
+    </div>
+    <div>
+        <button id="copiar" style="display: none">Copiar</button>
+        <div id="resultado"></div>
+    </div>
+</main>
+<script src="js/jquery-3.2.1.min.js"></script>
+<script>
+    function copiarAlPortapapeles(id_elemento) {
+        var aux = document.createElement("input");
+        aux.setAttribute("value", document.getElementById(id_elemento).innerHTML);
+        document.body.appendChild(aux);
+        aux.select();
+        document.execCommand("copy");
+        document.body.removeChild(aux);
+    }
+
+    function hash(n) {
+        $("#copiar").css({
+            display:"inline"
+        });
+        var formulario=$("#hash").val();
+        console.log(formulario);
+        $.ajax({
+            method:"GET",
+            url:"api.php",
+            data:"n="+n+"&hash="+formulario
+        }).done(function (data) {
+            console.log(data);
+            console.log(data["hash"]);
+            $("#resultado").html(data["hash"])
+        })
+    }
+
+    $(function () {
+
+        //if ($("#resultado")) Comprobar si esta vacio para mostrar el boton o no
+        /*if ($("#resultado").html()==""){
+            $("#copiar").css({
+                display:"none"
+            })
+        }
+        else{
+            $("#copiar").css({
+                display:"inline"
+            })
+        }*/
+
+        $("#md5").on("click", function () {
+            hash(1);
+        });
+        $("#sha1").on("click", function () {
+            hash(2);
+        });
+        $("#sha256").on("click", function () {
+            hash(3);
+        });
+        $("#copiar").on("click",function () {
+            copiarAlPortapapeles("resultado");
+        })
+    })
+</script>
+</body>
+</html>
